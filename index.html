@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORIT - Revolutionary Trading Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-glow">ORIT</div>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#platform" class="nav-link">Platform</a>
+                <a href="dashboard.html" class="nav-link dashboard-link">Dashboard</a>
+                <button class="cta-button">
+                    <span class="button-text">Get Started</span>
+                    <div class="button-glow"></div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <canvas id="particles-canvas"></canvas>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-badge">
+                    <span class="badge-glow">Revolutionary Trading</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Revolutionize Your</span>
+                    <span class="title-line gradient-text">Trading Experience</span>
+                    <span class="title-line">With ORIT</span>
+                </h1>
+                <p class="hero-description">
+                    Next-generation trading ecosystem powered by Aptos blockchain. 
+                    Trade stocks, crypto, and global markets with AI-powered insights, 
+                    voice commands, and lightning-fast execution.
+                </p>
+                <div class="hero-buttons">
+                    <a href="dashboard.html" class="primary-button dashboard-cta">
+                        <span>Launch Dashboard</span>
+                        <div class="button-particles"></div>
+                    </a>
+                    <button class="secondary-button">
+                        <span>Watch Demo</span>
+                        <div class="play-icon">▶</div>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">160k+</div>
+                        <div class="stat-label">TPS</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">0.001s</div>
+                        <div class="stat-label">Latency</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-right">
+                <div class="trading-dashboard">
+                    <div class="dashboard-glow"></div>
+                    <div class="dashboard-content">
+                        <div class="dashboard-header">
+                            <div class="header-left">
+                                <div class="status-indicator"></div>
+                                <span>Live Trading</span>
+                            </div>
+                            <div class="header-right">
+                                <span class="profit-indicator">+12.45%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <canvas id="trading-chart"></canvas>
+                            <div class="chart-overlay">
+                                <div class="price-tooltip">
+                                    <span class="price">$65,247.82</span>
+                                    <span class="change">+5.67%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="asset-list">
+                            <div class="asset-item">
+                                <div class="asset-icon btc">₿</div>
+                                <div class="asset-info">
+                                    <span class="asset-name">Bitcoin</span>
+                                    <span class="asset-price">$65,247.82</span>
+                                </div>
+                                <div class="asset-change positive">+5.67%</div>
+                            </div>
+                            <div class="asset-item">
+                                <div class="asset-icon eth">Ξ</div>
+                                <div class="asset-info">
+                                    <span class="asset-name">Ethereum</span>
+                                    <span class="asset-price">$3,428.91</span>
+                                </div>
+                                <div class="asset-change positive">+3.24%</div>
+                            </div>
+                            <div class="asset-item">
+                                <div class="asset-icon apt">A</div>
+                                <div class="asset-info">
+                                    <span class="asset-name">Aptos</span>
+                                    <span class="asset-price">$12.45</span>
+                                </div>
+                                <div class="asset-change positive">+8.91%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="floating-elements">
+                    <div class="floating-crypto btc-float">₿</div>
+                    <div class="floating-crypto eth-float">Ξ</div>
+                    <div class="floating-crypto apt-float">A</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <div class="section-badge">
+                <span class="badge-glow">Innovative Features</span>
+            </div>
+            <h2 class="section-title">Revolutionary Trading Tools</h2>
+            <p class="section-description">
+                Experience the future of trading with AI-powered insights,
+                voice commands, and seamless multi-asset support.
+            </p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="card-glow"></div>
+                <div class="feature-icon ai-bot">
+                    <div class="robot-head">
+                        <div class="robot-eye left"></div>
+                        <div class="robot-eye right"></div>
+                        <div class="neural-network">
+                            <div class="neural-node"></div>
+                            <div class="neural-node"></div>
+                            <div class="neural-node"></div>
+                            <div class="neural-connection"></div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="feature-title">AI Trading Bot</h3>
+                <p class="feature-description">
+                    Smart algorithms analyze market trends and execute trades 
+                    with precision timing and risk management.
+                </p>
+                <div class="feature-stats">
+                    <span class="stat">98.7% Accuracy</span>
+                    <span class="stat">24/7 Active</span>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-glow"></div>
+                <div class="feature-icon voice-trading">
+                    <div class="sound-waves">
+                        <div class="wave wave-1"></div>
+                        <div class="wave wave-2"></div>
+                        <div class="wave wave-3"></div>
+                        <div class="wave wave-4"></div>
+                    </div>
+                    <div class="microphone">🎤</div>
+                </div>
+                <h3 class="feature-title">Voice Trading</h3>
+                <p class="feature-description">
+                    Execute trades hands-free with voice commands. 
+                    "Buy 1000 AAPL" - it's that simple.
+                </p>
+                <div class="feature-stats">
+                    <span class="stat">15 Languages</span>
+                    <span class="stat">99.9% Recognition</span>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-glow"></div>
+                <div class="feature-icon copy-trading">
+                    <div class="network-nodes">
+                        <div class="central-node"></div>
+                        <div class="connected-node node-1"></div>
+                        <div class="connected-node node-2"></div>
+                        <div class="connected-node node-3"></div>
+                        <div class="connection-line line-1"></div>
+                        <div class="connection-line line-2"></div>
+                        <div class="connection-line line-3"></div>
+                        <div class="data-flow flow-1"></div>
+                        <div class="data-flow flow-2"></div>
+                    </div>
+                </div>
+                <h3 class="feature-title">Copy Trading Network</h3>
+                <p class="feature-description">
+                    Follow and automatically copy strategies from 
+                    top-performing traders in our ecosystem.
+                </p>
+                <div class="feature-stats">
+                    <span class="stat">10k+ Traders</span>
+                    <span class="stat">Real-time Sync</span>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="card-glow"></div>
+                <div class="feature-icon paper-trading">
+                    <div class="holographic-interface">
+                        <div class="holo-screen">
+                            <div class="demo-watermark">DEMO</div>
+                            <div class="chart-lines">
+                                <div class="chart-line"></div>
+                                <div class="chart-line"></div>
+                                <div class="chart-line"></div>
+                            </div>
+                        </div>
+                        <div class="holo-glow"></div>
+                    </div>
+                </div>
+                <h3 class="feature-title">Paper Trading</h3>
+                <p class="feature-description">
+                    Practice with virtual money in real market conditions. 
+                    Perfect your strategy risk-free.
+                </p>
+                <div class="feature-stats">
+                    <span class="stat">$100k Virtual</span>
+                    <span class="stat">Real-time Data</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="technology-section">
+        <div class="tech-bg">
+            <div class="blockchain-visualization">
+                <canvas id="blockchain-canvas"></canvas>
+            </div>
+        </div>
+        
+        <div class="tech-content">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span class="badge-glow">Powered by Aptos</span>
+                </div>
+                <h2 class="section-title">Next-Gen Blockchain Technology</h2>
+                <p class="section-description">
+                    Built on Aptos for unmatched speed, security, and scalability.
+                    Experience the future of decentralized trading.
+                </p>
+            </div>
+            
+            <div class="tech-features">
+                <div class="tech-feature">
+                    <div class="tech-icon speed">
+                        <div class="speed-indicator">
+                            <div class="speed-ring"></div>
+                            <div class="speed-needle"></div>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <h3>Lightning Speed</h3>
+                        <p>160,000+ TPS with sub-second finality</p>
+                        <div class="tech-metric">
+                            <span class="metric-value">0.001s</span>
+                            <span class="metric-label">Average Latency</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-feature">
+                    <div class="tech-icon security">
+                        <div class="security-shield">
+                            <div class="shield-outer"></div>
+                            <div class="shield-inner"></div>
+                            <div class="security-pattern"></div>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <h3>Fort Knox Security</h3>
+                        <p>Move language prevents exploits and bugs</p>
+                        <div class="tech-metric">
+                            <span class="metric-value">100%</span>
+                            <span class="metric-label">Exploit-Free</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-feature">
+                    <div class="tech-icon scalability">
+                        <div class="scale-visualization">
+                            <div class="scale-node node-1"></div>
+                            <div class="scale-node node-2"></div>
+                            <div class="scale-node node-3"></div>
+                            <div class="scale-connection"></div>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <h3>Infinite Scalability</h3>
+                        <p>Handles millions of users simultaneously</p>
+                        <div class="tech-metric">
+                            <span class="metric-value">∞</span>
+                            <span class="metric-label">User Capacity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="supported-assets">
+                <h3 class="assets-title">Multi-Asset Support</h3>
+                <div class="assets-grid">
+                    <div class="asset-category">
+                        <div class="category-icon stocks">📈</div>
+                        <span>Indian Stocks</span>
+                        <div class="category-glow"></div>
+                    </div>
+                    <div class="asset-category">
+                        <div class="category-icon global">🌍</div>
+                        <span>Global Markets</span>
+                        <div class="category-glow"></div>
+                    </div>
+                    <div class="asset-category">
+                        <div class="category-icon crypto">₿</div>
+                        <span>Cryptocurrencies</span>
+                        <div class="category-glow"></div>
+                    </div>
+                    <div class="asset-category">
+                        <div class="category-icon forex">💱</div>
+                        <span>Forex & Currencies</span>
+                        <div class="category-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section id="platform" class="platform-section">
+        <div class="platform-content">
+            <div class="platform-left">
+                <div class="section-header">
+                    <div class="section-badge">
+                        <span class="badge-glow">One Platform, All Markets</span>
+                    </div>
+                    <h2 class="section-title">Trade Everything, Everywhere</h2>
+                    <p class="section-description">
+                        Access global markets from a single, intuitive interface.
+                        From Dalal Street to Wall Street to DeFi - all in one app.
+                    </p>
+                </div>
+                
+                <div class="platform-features">
+                    <div class="platform-feature">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-content">
+                            <h4>Real-time Market Data</h4>
+                            <p>Live prices, charts, and analytics across all markets</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-content">
+                            <h4>Advanced Charting</h4>
+                            <p>Professional-grade tools with 100+ technical indicators</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-content">
+                            <h4>Smart Alerts</h4>
+                            <p>AI-powered notifications for price movements and opportunities</p>
+                        </div>
+                    </div>
+                    <div class="platform-feature">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-content">
+                            <h4>Portfolio Analytics</h4>
+                            <p>Comprehensive performance tracking and risk analysis</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="platform-cta">
+                    <button class="primary-button large">
+                        <span>Download ORIT</span>
+                        <div class="button-particles"></div>
+                    </button>
+                    <div class="download-options">
+                        <span class="download-text">Available on</span>
+                        <div class="store-badges">
+                            <div class="store-badge ios">📱 App Store</div>
+                            <div class="store-badge android">🤖 Google Play</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="platform-right">
+                <div class="device-showcase">
+                    <div class="device-mockup phone">
+                        <div class="device-glow"></div>
+                        <div class="device-screen">
+                            <div class="app-interface">
+                                <div class="app-header">
+                                    <span class="app-title">ORIT</span>
+                                    <div class="app-status">
+                                        <div class="status-dot"></div>
+                                        <span>Live</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-overview">
+                                    <div class="portfolio-value">
+                                        <span class="value">$127,845.92</span>
+                                        <span class="change positive">+12.47% Today</span>
+                                    </div>
+                                    <div class="mini-chart">
+                                        <canvas id="mini-chart-canvas"></canvas>
+                                    </div>
+                                </div>
+                                <div class="quick-actions">
+                                    <div class="action-button buy">Buy</div>
+                                    <div class="action-button sell">Sell</div>
+                                    <div class="action-button voice">🎤</div>
+                                    <div class="action-button ai">🤖</div>
+                                </div>
+                                <div class="asset-grid">
+                                    <div class="mini-asset">
+                                        <span class="symbol">BTC</span>
+                                        <span class="price">$65,247</span>
+                                        <span class="change pos">+5.67%</span>
+                                    </div>
+                                    <div class="mini-asset">
+                                        <span class="symbol">ETH</span>
+                                        <span class="price">$3,428</span>
+                                        <span class="change pos">+3.24%</span>
+                                    </div>
+                                    <div class="mini-asset">
+                                        <span class="symbol">AAPL</span>
+                                        <span class="price">$182.50</span>
+                                        <span class="change neg">-1.23%</span>
+                                    </div>
+                                    <div class="mini-asset">
+                                        <span class="symbol">TSLA</span>
+                                        <span class="price">$248.92</span>
+                                        <span class="change pos">+2.15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-ui-elements">
+                        <div class="ui-element notification">
+                            <div class="notification-icon">🔔</div>
+                            <div class="notification-text">
+                                <span class="title">Price Alert</span>
+                                <span class="desc">BTC reached $65,000</span>
+                            </div>
+                        </div>
+                        <div class="ui-element voice-command">
+                            <div class="voice-icon">🎤</div>
+                            <div class="voice-text">"Buy 100 shares of AAPL"</div>
+                            <div class="voice-waveform">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                        </div>
+                        <div class="ui-element ai-insight">
+                            <div class="ai-icon">🤖</div>
+                            <div class="ai-text">
+                                <span class="title">AI Insight</span>
+                                <span class="desc">Strong buy signal detected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-content">
+            <div class="trust-stats">
+                <div class="trust-stat">
+                    <div class="stat-icon">
+                        <div class="icon-glow projects"></div>
+                        <span class="icon-text">400+</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Projects Completed</h3>
+                        <p>Successful trading integrations</p>
+                    </div>
+                </div>
+                
+                <div class="trust-stat">
+                    <div class="stat-icon">
+                        <div class="icon-glow roi"></div>
+                        <span class="icon-text">600%</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Return on Investment</h3>
+                        <p>Average user portfolio growth</p>
+                    </div>
+                </div>
+                
+                <div class="trust-stat">
+                    <div class="stat-icon">
+                        <div class="icon-glow downloads"></div>
+                        <span class="icon-text">10k</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Global Downloads</h3>
+                        <p>Active traders worldwide</p>
+                    </div>
+                </div>
+                
+                <div class="trust-stat">
+                    <div class="stat-icon">
+                        <div class="icon-glow reviews"></div>
+                        <span class="icon-text">200+</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>5-Star Reviews</h3>
+                        <p>Outstanding user satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-message">
+                <h2>No long-term contracts. No catches. Simple.</h2>
+                <p>Start your 30-day free trial. Cancel anytime.</p>
+                <div class="trust-buttons">
+                    <button class="secondary-button">View Demo</button>
+                    <button class="cta-button">
+                        <span class="button-text">Get Started</span>
+                        <div class="button-glow"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <div class="logo-glow">ORIT</div>
+                </div>
+                <p class="footer-description">
+                    Empowering crypto transactions that scale with your ambitions.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📧</a>
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">🌐</a>
+                    <a href="#" class="social-link">📋</a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Overview</h4>
+                    <a href="#">Features</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Help</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+            
+            <div class="footer-app">
+                <h4>Get the app</h4>
+                <div class="app-downloads">
+                    <div class="download-badge">
+                        <span class="badge-icon">📱</span>
+                        <div class="badge-text">
+                            <span class="download-text">Download on the</span>
+                            <span class="store-name">App Store</span>
+                        </div>
+                    </div>
+                    <div class="download-badge">
+                        <span class="badge-icon">🤖</span>
+                        <div class="badge-text">
+                            <span class="download-text">Get it on</span>
+                            <span class="store-name">Google Play</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ORIT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

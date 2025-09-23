@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORIT Dashboard - Advanced Trading Interface</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <div class="logo-icon">O</div>
+                <span class="logo-text">ORIT</span>
+            </div>
+            <a href="index.html" class="back-to-home" title="Back to Home">
+                <span class="back-icon">←</span>
+                <span class="back-text">Home</span>
+            </a>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-avatar">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23066ff'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-family='Inter'%3EU%3C/text%3E%3C/svg%3E" alt="User Avatar">
+            </div>
+            <div class="profile-info">
+                <span class="profile-name">Trading Pro</span>
+                <span class="profile-status">Premium</span>
+            </div>
+            <button class="deposit-btn">
+                <span>Deposit</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">🏠</div>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">📊</div>
+                    <span>Portfolio</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">👁</div>
+                    <span>Watchlist</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">📈</div>
+                    <span>Market</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">💰</div>
+                    <span>Funds</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">🔬</div>
+                    <span>Research</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon">🛠</div>
+                    <span>Tools</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="masterclass-promo">
+                <div class="promo-image">
+                    <div class="gradient-bg"></div>
+                    <div class="promo-content">
+                        <h4>ORIT Masterclass</h4>
+                        <p>Unlock advanced trading strategies</p>
+                        <button class="explore-btn">Explore</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-main">
+        <!-- Top Header Bar -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h1 class="page-title">CoinMarketCap 100 Index</h1>
+                <div class="header-badges">
+                    <span class="badge">Factsheet</span>
+                    <span class="badge">Methodology</span>
+                    <span class="badge">API details</span>
+                    <span class="badge">More details</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="last-update">
+                    Last Update: <span class="update-time">Dec 13 2024, 07:05 PM</span>
+                </div>
+                <div class="header-controls">
+                    <button class="search-btn">
+                        <div class="search-icon">🔍</div>
+                        <span>Search here...</span>
+                    </button>
+                    <button class="settings-btn">
+                        <div class="settings-icon">⚙️</div>
+                        <span>Settings</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Grid Layout -->
+        <div class="dashboard-grid">
+            <!-- Index Overview Card -->
+            <div class="dashboard-card index-overview">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="index-label">CMC 100</span>
+                        <h2 class="index-value">$262.84</h2>
+                    </div>
+                    <div class="performance-indicator positive">
+                        <span class="arrow">▲</span>
+                        <span class="percentage">+40%</span>
+                    </div>
+                </div>
+                
+                <div class="mini-chart-container">
+                    <canvas id="mini-trend-chart"></canvas>
+                </div>
+                
+                <div class="performance-metrics">
+                    <div class="metric-group">
+                        <h4>24-Hour Profit Snapshot</h4>
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Yearly Performance</span>
+                                <span class="metric-value positive">+40.09%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Historical Values</span>
+                                <div class="historical-data">
+                                    <div class="data-point high">
+                                        <span class="label">High - 5 Dec 2024</span>
+                                        <span class="value">$229.68</span>
+                                    </div>
+                                    <div class="data-point low">
+                                        <span class="label">Low - 23 Jan 2024</span>
+                                        <span class="value">$103.41</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Trading Chart -->
+            <div class="dashboard-card main-chart">
+                <div class="chart-header">
+                    <h3>CoinMarketCap 100 Index Chart</h3>
+                    <div class="chart-controls">
+                        <div class="timeframe-selector">
+                            <button class="timeframe-btn">1D</button>
+                            <button class="timeframe-btn">1W</button>
+                            <button class="timeframe-btn active">1M</button>
+                            <button class="timeframe-btn">3M</button>
+                            <button class="timeframe-btn">1Y</button>
+                            <button class="timeframe-btn">ALL</button>
+                        </div>
+                        <div class="chart-type-selector">
+                            <button class="chart-type-btn active">Candlestick</button>
+                            <button class="chart-type-btn">Line</button>
+                            <button class="chart-type-btn">Area</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="main-trading-chart"></canvas>
+                    <div class="chart-overlay">
+                        <div class="price-levels">
+                            <div class="support-line">Support: $245.20</div>
+                            <div class="resistance-line">Resistance: $285.40</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-footer">
+                    <div class="volume-info">
+                        <span class="volume-label">24h Volume:</span>
+                        <span class="volume-value">$1.2B</span>
+                    </div>
+                    <div class="market-cap-info">
+                        <span class="mcap-label">Market Cap:</span>
+                        <span class="mcap-value">$2.8T</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Analysis Panel -->
+            <div class="dashboard-card market-analysis">
+                <div class="card-header">
+                    <h3>Market Analysis</h3>
+                    <div class="analysis-tabs">
+                        <button class="tab-btn active">Technical</button>
+                        <button class="tab-btn">Fundamental</button>
+                        <button class="tab-btn">Sentiment</button>
+                    </div>
+                </div>
+                
+                <div class="analysis-content">
+                    <div class="indicator-group">
+                        <div class="indicator-item">
+                            <span class="indicator-name">RSI (14)</span>
+                            <div class="indicator-value">
+                                <span class="value">68.3</span>
+                                <span class="status bullish">Bullish</span>
+                            </div>
+                            <div class="indicator-bar">
+                                <div class="bar-fill" style="width: 68.3%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="indicator-item">
+                            <span class="indicator-name">MACD</span>
+                            <div class="indicator-value">
+                                <span class="value">+2.34</span>
+                                <span class="status bullish">Bullish</span>
+                            </div>
+                        </div>
+                        
+                        <div class="indicator-item">
+                            <span class="indicator-name">Moving Average (50)</span>
+                            <div class="indicator-value">
+                                <span class="value">$251.45</span>
+                                <span class="status bullish">Above</span>
+                            </div>
+                        </div>
+                        
+                        <div class="indicator-item">
+                            <span class="indicator-name">Bollinger Bands</span>
+                            <div class="indicator-value">
+                                <span class="value">Middle Band</span>
+                                <span class="status neutral">Neutral</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-insights">
+                        <div class="ai-header">
+                            <div class="ai-icon">🤖</div>
+                            <span>AI Market Insight</span>
+                        </div>
+                        <p class="insight-text">
+                            Based on current market conditions and technical indicators, 
+                            the CMC 100 Index shows strong bullish momentum with potential 
+                            for continued upward movement. Key resistance at $285.40.
+                        </p>
+                        <div class="confidence-score">
+                            <span>Confidence: </span>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: 87%"></div>
+                            </div>
+                            <span>87%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Cryptocurrencies Table -->
+            <div class="dashboard-card crypto-table">
+                <div class="table-header">
+                    <h3>CoinMarketCap 100 Index Constituents</h3>
+                    <div class="table-controls">
+                        <button class="export-btn">📊</button>
+                        <button class="refresh-btn">🔄</button>
+                        <button class="expand-btn">⛶</button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="crypto-table-grid">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Coin</th>
+                                <th>Price</th>
+                                <th>Trend</th>
+                                <th>Market Cap</th>
+                                <th>Coin Weight</th>
+                                <th>Exchange</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td>1</td>
+                                <td class="coin-cell">
+                                    <div class="coin-info">
+                                        <div class="coin-icon btc">₿</div>
+                                        <div class="coin-details">
+                                            <span class="coin-name">Bitcoin</span>
+                                            <span class="coin-symbol">BTC</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-cell">$94559.21</td>
+                                <td class="trend-cell negative">
+                                    <span class="trend-arrow">↓</span>
+                                    <span class="trend-value">0.08%</span>
+                                </td>
+                                <td class="mcap-cell">$1,881.2B</td>
+                                <td class="weight-cell">
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: 26.91%"></div>
+                                    </div>
+                                    <span class="weight-text">26.91%</span>
+                                </td>
+                                <td class="exchange-cell">Binance</td>
+                            </tr>
+                            
+                            <tr class="table-row">
+                                <td>2</td>
+                                <td class="coin-cell">
+                                    <div class="coin-info">
+                                        <div class="coin-icon eth">Ξ</div>
+                                        <div class="coin-details">
+                                            <span class="coin-name">Ethereum</span>
+                                            <span class="coin-symbol">ETH</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-cell">$4379.19</td>
+                                <td class="trend-cell negative">
+                                    <span class="trend-arrow">↓</span>
+                                    <span class="trend-value">1.47%</span>
+                                </td>
+                                <td class="mcap-cell">$525.4B</td>
+                                <td class="weight-cell">
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: 30.36%"></div>
+                                    </div>
+                                    <span class="weight-text">30.36%</span>
+                                </td>
+                                <td class="exchange-cell">Coinbase</td>
+                            </tr>
+                            
+                            <tr class="table-row">
+                                <td>3</td>
+                                <td class="coin-cell">
+                                    <div class="coin-info">
+                                        <div class="coin-icon inj">◉</div>
+                                        <div class="coin-details">
+                                            <span class="coin-name">Injective</span>
+                                            <span class="coin-symbol">INJ</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-cell">$71.82</td>
+                                <td class="trend-cell negative">
+                                    <span class="trend-arrow">↓</span>
+                                    <span class="trend-value">0.95%</span>
+                                </td>
+                                <td class="mcap-cell">$6.02B</td>
+                                <td class="weight-cell">
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: 9.64%"></div>
+                                    </div>
+                                    <span class="weight-text">9.64%</span>
+                                </td>
+                                <td class="exchange-cell">KuCoin</td>
+                            </tr>
+                            
+                            <tr class="table-row">
+                                <td>4</td>
+                                <td class="coin-cell">
+                                    <div class="coin-info">
+                                        <div class="coin-icon bpt">●</div>
+                                        <div class="coin-details">
+                                            <span class="coin-name">Blockport</span>
+                                            <span class="coin-symbol">BPT</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-cell">$301.07</td>
+                                <td class="trend-cell negative">
+                                    <span class="trend-arrow">↓</span>
+                                    <span class="trend-value">1.18%</span>
+                                </td>
+                                <td class="mcap-cell">$3.56B</td>
+                                <td class="weight-cell">
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: 7.27%"></div>
+                                    </div>
+                                    <span class="weight-text">7.27%</span>
+                                </td>
+                                <td class="exchange-cell">Huobi</td>
+                            </tr>
+                            
+                            <tr class="table-row">
+                                <td>5</td>
+                                <td class="coin-cell">
+                                    <div class="coin-info">
+                                        <div class="coin-icon anc">⚓</div>
+                                        <div class="coin-details">
+                                            <span class="coin-name">Anchor</span>
+                                            <span class="coin-symbol">ANC</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-cell">$101.86</td>
+                                <td class="trend-cell negative">
+                                    <span class="trend-arrow">↓</span>
+                                    <span class="trend-value">0.72%</span>
+                                </td>
+                                <td class="mcap-cell">$4.76B</td>
+                                <td class="weight-cell">
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: 36.15%"></div>
+                                    </div>
+                                    <span class="weight-text">36.15%</span>
+                                </td>
+                                <td class="exchange-cell">OKX</td>
+                            </tr>
+                            
+                            <tr class="table-row">
+                                <td>6</td>
+                                <td class="coin-cell">
+                                    <div class="coin-info">
+                                        <div class="coin-icon cob">◆</div>
+                                        <div class="coin-details">
+                                            <span class="coin-name">Cobinhood</span>
+                                            <span class="coin-symbol">COB</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-cell">$1255.91</td>
+                                <td class="trend-cell negative">
+                                    <span class="trend-arrow">↓</span>
+                                    <span class="trend-value">0.62%</span>
+                                </td>
+                                <td class="mcap-cell">$1.83B</td>
+                                <td class="weight-cell">
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: 43.51%"></div>
+                                    </div>
+                                    <span class="weight-text">43.51%</span>
+                                </td>
+                                <td class="exchange-cell">Bitfinex</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="pagination">
+                        <button class="page-btn prev">‹</button>
+                        <span class="page-info">1 of 15</span>
+                        <button class="page-btn next">›</button>
+                    </div>
+                    <div class="table-stats">
+                        <span>Showing 6 of 100 assets</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exchange Distribution -->
+            <div class="dashboard-card exchange-distribution">
+                <div class="card-header">
+                    <h3>Exchange Distribution</h3>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #00ff88;"></div>
+                            <span>Binance</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #0066ff;"></div>
+                            <span>Coinbase</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff6b35;"></div>
+                            <span>Others</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pie-chart-container">
+                    <canvas id="exchange-pie-chart"></canvas>
+                    <div class="chart-center-info">
+                        <span class="center-value">3,450</span>
+                        <span class="center-label">Total Trades</span>
+                    </div>
+                </div>
+                
+                <div class="exchange-stats">
+                    <div class="stat-row">
+                        <span class="exchange-name">Binance</span>
+                        <span class="exchange-volume">$485M</span>
+                        <span class="exchange-share">42.3%</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="exchange-name">Coinbase</span>
+                        <span class="exchange-volume">$321M</span>
+                        <span class="exchange-share">28.1%</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="exchange-name">Others</span>
+                        <span class="exchange-volume">$339M</span>
+                        <span class="exchange-share">29.6%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Panel -->
+            <div class="dashboard-card quick-actions">
+                <div class="card-header">
+                    <h3>Quick Actions</h3>
+                </div>
+                
+                <div class="actions-grid">
+                    <button class="action-btn buy-btn">
+                        <div class="action-icon">📈</div>
+                        <span class="action-label">Buy</span>
+                        <div class="action-glow buy-glow"></div>
+                    </button>
+                    
+                    <button class="action-btn sell-btn">
+                        <div class="action-icon">📉</div>
+                        <span class="action-label">Sell</span>
+                        <div class="action-glow sell-glow"></div>
+                    </button>
+                    
+                    <button class="action-btn voice-btn">
+                        <div class="action-icon">🎤</div>
+                        <span class="action-label">Voice Trade</span>
+                        <div class="voice-waves">
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn ai-btn">
+                        <div class="action-icon">🤖</div>
+                        <span class="action-label">AI Assistant</span>
+                        <div class="ai-pulse"></div>
+                    </button>
+                    
+                    <button class="action-btn copy-btn">
+                        <div class="action-icon">👥</div>
+                        <span class="action-label">Copy Trade</span>
+                        <div class="copy-network">
+                            <div class="network-node"></div>
+                            <div class="network-node"></div>
+                            <div class="network-connection"></div>
+                        </div>
+                    </button>
+                    
+                    <button class="action-btn paper-btn">
+                        <div class="action-icon">📋</div>
+                        <span class="action-label">Paper Trade</span>
+                        <div class="paper-demo">DEMO</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button for Mobile -->
+    <div class="floating-action">
+        <button class="fab-btn">
+            <div class="fab-icon">+</div>
+            <div class="fab-glow"></div>
+        </button>
+        <div class="fab-menu">
+            <button class="fab-item">📈</button>
+            <button class="fab-item">📉</button>
+            <button class="fab-item">🎤</button>
+            <button class="fab-item">🤖</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+        </div>
+        <p class="loading-text">Loading Market Data...</p>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
