@@ -385,6 +385,30 @@ body {
     transform: translateY(-3px);
 }
 
+.crypto-category {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.crypto-category:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 102, 255, 0.3);
+}
+
+.crypto-category:hover .category-glow {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.crypto-category:hover .category-icon {
+    animation: cryptoPulse 1s ease-in-out infinite;
+}
+
+@keyframes cryptoPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
 @keyframes particleFlow {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }

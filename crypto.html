@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORIT Crypto Markets - Live Cryptocurrency Data</title>
+    <link rel="stylesheet" href="crypto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-date-fns/2.0.0/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-glow">ORIT</div>
+            </div>
+            <div class="loading-text">Loading Crypto Markets...</div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="crypto-navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">
+                    <div class="logo-icon">O</div>
+                    <span class="logo-text">ORIT</span>
+                </a>
+                <div class="nav-breadcrumb">
+                    <span class="breadcrumb-item">Markets</span>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-item active">Cryptocurrencies</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="market-status">
+                    <div class="status-indicator live"></div>
+                    <span>Live Data</span>
+                </div>
+                <a href="dashboard.html" class="nav-cta">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="crypto-main">
+        <!-- Market Overview Cards -->
+        <section class="market-overview">
+            <div class="overview-grid">
+                <div class="overview-card market-cap">
+                    <div class="card-header">
+                        <h3>Total Market Cap</h3>
+                        <div class="card-icon">🏆</div>
+                    </div>
+                    <div class="card-value" id="totalMarketCap">$0</div>
+                    <div class="card-change" id="marketCapChange">+0.00%</div>
+                </div>
+                
+                <div class="overview-card volume">
+                    <div class="card-header">
+                        <h3>24h Volume</h3>
+                        <div class="card-icon">📊</div>
+                    </div>
+                    <div class="card-value" id="totalVolume">$0</div>
+                    <div class="card-change" id="volumeChange">+0.00%</div>
+                </div>
+                
+                <div class="overview-card dominance">
+                    <div class="card-header">
+                        <h3>BTC Dominance</h3>
+                        <div class="card-icon">₿</div>
+                    </div>
+                    <div class="card-value" id="btcDominance">0%</div>
+                    <div class="card-change" id="dominanceChange">+0.00%</div>
+                </div>
+                
+                <div class="overview-card fear-greed">
+                    <div class="card-header">
+                        <h3>Fear & Greed Index</h3>
+                        <div class="card-icon">🎯</div>
+                    </div>
+                    <div class="fear-greed-meter">
+                        <div class="meter-arc">
+                            <div class="meter-fill" id="fearGreedFill"></div>
+                        </div>
+                        <div class="meter-value" id="fearGreedValue">50</div>
+                        <div class="meter-label" id="fearGreedLabel">Neutral</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Cryptocurrencies Section -->
+        <section class="top-cryptos">
+            <div class="section-header">
+                <h2>Top Cryptocurrencies by Market Cap</h2>
+                <div class="section-controls">
+                    <div class="view-toggle">
+                        <button class="toggle-btn active" data-view="table">Table</button>
+                        <button class="toggle-btn" data-view="cards">Cards</button>
+                    </div>
+                    <div class="crypto-filters">
+                        <select id="sortBy" class="filter-select">
+                            <option value="market_cap">Market Cap</option>
+                            <option value="price">Price</option>
+                            <option value="percent_change_24h">24h Change</option>
+                            <option value="volume_24h">Volume</option>
+                        </select>
+                        <select id="limitBy" class="filter-select">
+                            <option value="50">Top 50</option>
+                            <option value="100" selected>Top 100</option>
+                            <option value="200">Top 200</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Table View -->
+            <div class="crypto-table-container" id="tableView">
+                <div class="table-wrapper">
+                    <table class="crypto-table">
+                        <thead>
+                            <tr>
+                                <th class="rank-col">#</th>
+                                <th class="name-col">Name</th>
+                                <th class="price-col">Price</th>
+                                <th class="change-col">24h %</th>
+                                <th class="change-col">7d %</th>
+                                <th class="volume-col">Volume(24h)</th>
+                                <th class="market-cap-col">Market Cap</th>
+                                <th class="chart-col">Last 7 Days</th>
+                                <th class="action-col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cryptoTableBody">
+                            <!-- Dynamic content will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-pagination">
+                    <button class="page-btn" id="prevPage" disabled>← Previous</button>
+                    <div class="page-info">
+                        <span id="pageInfo">Page 1 of 2</span>
+                    </div>
+                    <button class="page-btn" id="nextPage">Next →</button>
+                </div>
+            </div>
+
+            <!-- Crypto Cards View -->
+            <div class="crypto-cards-container hidden" id="cardsView">
+                <div class="crypto-grid" id="cryptoCardsGrid">
+                    <!-- Dynamic cards will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Analytics Section -->
+        <section class="analytics-section">
+            <div class="analytics-grid">
+                <!-- Market Trends Chart -->
+                <div class="analytics-card chart-card">
+                    <div class="card-header">
+                        <h3>Market Trends</h3>
+                        <div class="chart-controls">
+                            <div class="timeframe-selector">
+                                <button class="timeframe-btn active" data-period="24h">24H</button>
+                                <button class="timeframe-btn" data-period="7d">7D</button>
+                                <button class="timeframe-btn" data-period="30d">30D</button>
+                                <button class="timeframe-btn" data-period="1y">1Y</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="marketTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Gainers/Losers -->
+                <div class="analytics-card movers-card">
+                    <div class="card-header">
+                        <h3>Top Movers</h3>
+                        <div class="movers-toggle">
+                            <button class="mover-btn active" data-type="gainers">Gainers</button>
+                            <button class="mover-btn" data-type="losers">Losers</button>
+                        </div>
+                    </div>
+                    <div class="movers-list" id="moversList">
+                        <!-- Dynamic movers content -->
+                    </div>
+                </div>
+
+                <!-- Volume Leaders -->
+                <div class="analytics-card volume-card">
+                    <div class="card-header">
+                        <h3>Volume Leaders</h3>
+                        <div class="volume-timeframe">24h</div>
+                    </div>
+                    <div class="volume-list" id="volumeLeaders">
+                        <!-- Dynamic volume leaders -->
+                    </div>
+                </div>
+
+                <!-- Market Dominance Pie Chart -->
+                <div class="analytics-card dominance-card">
+                    <div class="card-header">
+                        <h3>Market Dominance</h3>
+                        <div class="dominance-legend">
+                            <div class="legend-item">
+                                <div class="legend-color bitcoin"></div>
+                                <span>Bitcoin</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color ethereum"></div>
+                                <span>Ethereum</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color others"></div>
+                                <span>Others</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="dominanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF & Institutional Data -->
+        <section class="institutional-section">
+            <div class="section-header">
+                <h2>Institutional & ETF Data</h2>
+            </div>
+            <div class="institutional-grid">
+                <div class="institutional-card etf-flows">
+                    <div class="card-header">
+                        <h3>Crypto ETF Net Flow</h3>
+                        <div class="flow-period">Sep 23, 2025</div>
+                    </div>
+                    <div class="flow-chart">
+                        <canvas id="etfFlowChart"></canvas>
+                    </div>
+                    <div class="flow-total">
+                        <div class="flow-value negative" id="etfNetFlow">-$445,118,000</div>
+                        <div class="flow-label">Net Flow Today</div>
+                    </div>
+                </div>
+
+                <div class="institutional-card open-interest">
+                    <div class="card-header">
+                        <h3>Open Interest</h3>
+                        <div class="oi-tabs">
+                            <button class="oi-tab active">Perpetuals</button>
+                            <button class="oi-tab">Futures</button>
+                        </div>
+                    </div>
+                    <div class="oi-data">
+                        <div class="oi-item">
+                            <span class="oi-label">Bitcoin</span>
+                            <span class="oi-value">$1.03T</span>
+                        </div>
+                        <div class="oi-item">
+                            <span class="oi-label">Ethereum</span>
+                            <span class="oi-value">$3.96B</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="institutional-card volatility">
+                    <div class="card-header">
+                        <h3>Volume Implied Volatility</h3>
+                    </div>
+                    <div class="volatility-data">
+                        <div class="vol-item">
+                            <span class="vol-label">Bitcoin</span>
+                            <span class="vol-value">38.87</span>
+                        </div>
+                        <div class="vol-item">
+                            <span class="vol-label">Ethereum</span>
+                            <span class="vol-value">67.22</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="institutional-card gas-tracker">
+                    <div class="card-header">
+                        <h3>ETH Gas Tracker</h3>
+                    </div>
+                    <div class="gas-data">
+                        <div class="gas-option">
+                            <span class="gas-type">Slow</span>
+                            <span class="gas-price">0.37 Gwei</span>
+                            <span class="gas-time">~60 sec</span>
+                        </div>
+                        <div class="gas-option">
+                            <span class="gas-type">Standard</span>
+                            <span class="gas-price">0.38 Gwei</span>
+                            <span class="gas-time">~30 sec</span>
+                        </div>
+                        <div class="gas-option">
+                            <span class="gas-type">Fast</span>
+                            <span class="gas-price">0.40 Gwei</span>
+                            <span class="gas-time">~15 sec</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab-btn" id="tradeFab">
+            <div class="fab-icon">⚡</div>
+            <div class="fab-label">Quick Trade</div>
+        </button>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <span>↑</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="crypto.js"></script>
+</body>
+</html>
